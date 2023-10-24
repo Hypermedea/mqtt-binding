@@ -34,17 +34,17 @@ public class MqttBinding extends BaseProtocolBinding {
 
     @Override
     protected Operation bindGet(String targetURI, Map<String, Object> formFields) {
-        return super.bindGet(targetURI, formFields);
+        return new SubscribeOperation(targetURI, formFields);
     }
 
     @Override
     protected Operation bindWatch(String targetURI, Map<String, Object> formFields) {
-        return super.bindWatch(targetURI, formFields);
+        return new SubscribeOperation(targetURI, formFields);
     }
 
     @Override
     protected Operation bindPut(String targetURI, Map<String, Object> formFields) {
-        return super.bindPut(targetURI, formFields);
+        return new PublishOperation(targetURI, formFields);
     }
 
 }
