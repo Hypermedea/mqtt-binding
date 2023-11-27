@@ -2,14 +2,15 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'org.hypermedea'
+version = '0.4.1'
 
 repositories {
     mavenCentral()
     maven { url 'https://repo.gradle.org/gradle/libs-releases' }
     maven { url 'https://raw.github.com/jacamo-lang/mvn-repo/master' }
     maven { url 'https://jitpack.io' }
+    mavenLocal()
 }
 
 dependencies {
@@ -19,8 +20,10 @@ dependencies {
     compileOnly group: 'org.jacamo', name: 'jacamo', version: '1.2'
     testImplementation group: 'org.jacamo', name: 'jacamo', version: '1.2'
 
-    compileOnly 'com.github.Hypermedea:hypermedea:798cd93'
-    testImplementation 'com.github.Hypermedea:hypermedea:798cd93'
+    //compileOnly 'com.github.Hypermedea:hypermedea:0.4.1'
+    //testImplementation 'com.github.Hypermedea:hypermedea:0.4.1'
+    compileOnly 'org.hypermedea:hypermedea:0.4.1'
+    testImplementation 'org.hypermedea:hypermedea:0.4.1'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
