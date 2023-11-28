@@ -1,9 +1,17 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'org.hypermedea'
 version = '0.4.1'
+
+java {
+    toolchain {
+        // ensures compatibility with JaCaMo 1.2
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -14,8 +22,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5'
-    testImplementation 'org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5'
+    implementation 'org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5'
 
     compileOnly group: 'org.jacamo', name: 'jacamo', version: '1.2'
     testImplementation group: 'org.jacamo', name: 'jacamo', version: '1.2'
@@ -31,4 +38,16 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'mqtt-binding'
+            version = version
+
+            from components.java
+        }
+    }
 }

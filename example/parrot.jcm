@@ -1,0 +1,13 @@
+mas parrot_mas {
+
+    agent parrot {
+        goals: start
+        join: mqtt_workspace
+        focus: mqtt_workspace.h
+    }
+
+    workspace mqtt_workspace  {
+        artifact h: org.hypermedea.HypermedeaArtifact()
+    }
+
+}
