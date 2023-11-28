@@ -9,18 +9,18 @@ repositories {
     mavenCentral()
     maven { url 'https://repo.gradle.org/gradle/libs-releases' }
     maven { url 'https://raw.github.com/jacamo-lang/mvn-repo/master' }
-    maven { url "https://jitpack.io" }
+    maven { url "https://hypermedea.github.io/maven" }
     mavenLocal()
 }
 
 dependencies {
     implementation group: 'org.jacamo', name: 'jacamo', version: '1.2'
 
-    // note: artifact can also be published to Maven local (see 'publishToMavenLocal' task in hypermedea-lib)
-    implementation group: 'com.github.Hypermedea', name: 'hypermedea', version: '0.4.1'
+    // note: artifact can also be published to Maven local (see 'publishToMavenLocal' task in main project)
+    implementation group: 'org.hypermedea', name: 'hypermedea', version: '0.4.1'
 
     // MQTT binding library
-    implementation group: 'com.github.Hypermedea', name: 'mqtt-binding', version: '0.4.1'
+    implementation group: 'org.hypermedea', name: 'mqtt-binding', version: '0.4.1'
 }
 
 task run (type: JavaExec, dependsOn: 'classes') {
