@@ -1,5 +1,6 @@
 package org.hypermedea.mqtt;
 
+import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.common.MqttException;
 import org.hypermedea.op.BaseOperation;
@@ -21,12 +22,12 @@ public abstract class MqttOperation extends BaseOperation {
 
         try {
             URI uri = new URI(target);
-            topic = uri.getPath();
+            topic = getTopic(uri.getPath());
 
             URI serverURI = getServerURI(uri);
 
-            // FIXME file persistence raises exception?
             String id = "Hypermedea-" + UUID.randomUUID();
+            // no persistence if arg set to null (default is file logging)
             client = new MqttClient(serverURI.toString(), id, null);
         } catch (URISyntaxException e) {
             throw new InvalidFormException(e);
@@ -34,6 +35,11 @@ public abstract class MqttOperation extends BaseOperation {
             // TODO can be a client error or server error
             throw new RuntimeException(e);
         }
+    }
+
+    private String getTopic(String path) {
+        if (path.startsWith("/")) return path.substring(1);
+        else return path;
     }
 
     private URI getServerURI(URI mqttURI) throws URISyntaxException {

@@ -21,7 +21,7 @@ public class MqttBindingTest {
 
     public static final String TOPIC_MSG = "testing";
 
-    private class CountingCallback implements ResponseCallback {
+    private static class CountingCallback implements ResponseCallback {
 
         public int count = 0;
 
@@ -60,7 +60,7 @@ public class MqttBindingTest {
         Response subRes = sub.getResponse();
         RepresentationHandlers.serialize(subRes.getPayload(), out, TOPIC_URI);
 
-        assertEquals(new String(out.toByteArray()), TOPIC_MSG);
+        assertEquals(out.toString(), TOPIC_MSG);
     }
 
     @Test
